@@ -1,7 +1,7 @@
 import { View, type ViewProps } from "react-native"
 import { cn } from "@/helpers/cn"
 
-type IndicatorProps = ViewProps
+export type IndicatorProps = ViewProps
 
 export function Indicator(props: IndicatorProps) {
   const { className, ...rest } = props
