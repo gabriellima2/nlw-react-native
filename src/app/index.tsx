@@ -1,7 +1,7 @@
-import { Category } from "@/components/category";
-import { Header } from "@/components/header";
+import { View } from "react-native";
+
 import { ProductCategories } from "@/components/product-categories";
-import { ScrollView, Text, View } from "react-native";
+import { Header } from "@/components/header";
 
 export default function Home() {
   return (
