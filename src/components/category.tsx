@@ -12,8 +12,8 @@ export function Category(props: CategoryProps) {
     <Pressable
       className={cn(
         className,
-        "bg-slate-800 px-4 justify-center rounded-md h-10",
-        isSelected && 'border-2 border-lime-300'
+        "bg-slate-800 px-4 justify-center rounded-md h-10 border-2 border-transparent",
+        isSelected && 'border-lime-300'
       )}
       {...rest}
     >
