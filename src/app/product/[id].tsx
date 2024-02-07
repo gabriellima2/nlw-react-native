@@ -3,6 +3,8 @@ import { Image, Text, View } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { Feather } from "@expo/vector-icons";
 
+import { useCartStore } from "@/store/cart-store";
+
 import { ProductIngredients } from "@/components/product-ingredients";
 import { LinkButton } from "@/components/link-button";
 import { Button } from "@/components/button";
@@ -12,6 +14,7 @@ import { PRODUCTS } from "@/data/products";
 
 export default function Product() {
   const { id } = useLocalSearchParams()
+  const cart = useCartStore()
   const product = useMemo(() => (
     PRODUCTS.filter((product) => product.id === id)[0]
   ), [id])
@@ -30,7 +33,7 @@ export default function Product() {
         <ProductIngredients ingredients={product.ingredients} />
       </View>
       <View className="p-5 pb-8 gap-5">
-        <Button>
+        <Button onPress={() => cart.add(product)}>
           <Button.Icon>
             <Feather name="plus-circle" size={20} />
             <Button.Text>Adicionar ao pedido</Button.Text>
