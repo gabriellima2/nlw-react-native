@@ -6,12 +6,13 @@ import { CATEGORIES } from "@/data/products";
 
 export type ProductCategoriesProps = {
   initialCategory?: string | null
+  onCategoryChange: (category: string) => void
 }
 
 const defaultCategory = CATEGORIES[0]
 
 export function ProductCategories(props: ProductCategoriesProps) {
-  const { initialCategory } = props
+  const { initialCategory, onCategoryChange } = props
   const [currentCategory, setCurrentCategory] = useState<string>(initialCategory ?? defaultCategory)
   return (
     <FlatList
@@ -21,7 +22,10 @@ export function ProductCategories(props: ProductCategoriesProps) {
         <Category
           title={item}
           isSelected={!!currentCategory && item === currentCategory}
-          onPress={() => setCurrentCategory(item)} />
+          onPress={() => {
+            setCurrentCategory(item)
+            onCategoryChange(item)
+          }} />
       )}
       className="max-h-10 mt-5"
       contentContainerStyle={{ gap: 12, paddingHorizontal: 20 }}

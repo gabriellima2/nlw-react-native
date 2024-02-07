@@ -2,10 +2,12 @@ import { SectionList, Text, type ImageSourcePropType } from "react-native";
 
 import { Product } from "./product";
 import { MENU } from "@/data/products";
+import { forwardRef } from "react";
 
-export function ProductListMenu() {
+export const ProductListMenu = forwardRef<SectionList>((_, ref) => {
   return (
     <SectionList
+      ref={ref}
       sections={MENU}
       keyExtractor={(item) => item.id}
       stickySectionHeadersEnabled={false}
@@ -24,4 +26,6 @@ export function ProductListMenu() {
       )}
     />
   )
-}
+})
+
+ProductListMenu.displayName = 'ProductListMenu'
