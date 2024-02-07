@@ -19,5 +19,9 @@ export const useCartStore = create<CartStoreProperties>((set, get) => ({
       return cartProduct
     })
     set((state) => ({ ...state, products: updatedProducts }))
+  },
+  calcAmount: () => {
+    const { products } = get()
+    return products.reduce((amount, product) => amount + product.quantity, 0)
   }
 }))

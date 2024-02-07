@@ -11,7 +11,7 @@ export type CartButtonProps = Omit<TouchableOpacityProps, 'children'> & {
 
 export function CartButton(props: CartButtonProps) {
   const { productsAmount, className, ...rest } = props
-  if (!productsAmount) return
+  if (productsAmount === undefined) return
   return (
     <TouchableOpacity className={cn(className, 'relative')} activeOpacity={0.7} {...rest}>
       <CartIndicator amount={productsAmount} className="top-2 z-10 -right-3.5" />

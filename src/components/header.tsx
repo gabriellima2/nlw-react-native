@@ -1,14 +1,13 @@
-import { Image, Text, View } from "react-native";
-
-import { CartButton } from "./cart-button";
+import { Text, View } from "react-native";
 import { Logo } from "./logo";
 
 export type HeaderProps = {
   title: string
+  renderRight?: () => JSX.Element
 }
 
 export function Header(props: HeaderProps) {
-  const { title } = props
+  const { title, renderRight } = props
   return (
     <View className="flex-row items-center border-b border-slate-700 pb-5 mx-5">
       <View className="flex-1">
@@ -17,7 +16,7 @@ export function Header(props: HeaderProps) {
           {title}
         </Text>
       </View>
-      <CartButton productsAmount={1} />
+      {renderRight && renderRight()}
     </View>
   )
 }

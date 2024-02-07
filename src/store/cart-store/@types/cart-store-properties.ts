@@ -4,4 +4,5 @@ import { Product } from "./product";
 export type CartStoreProperties = {
   products: Product[]
   add: (product: ProductProps) => void
+  calcAmount: () => number
 }
