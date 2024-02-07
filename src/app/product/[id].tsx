@@ -1,8 +1,11 @@
 import { useMemo } from "react";
 import { Image, Text, View } from "react-native";
 import { useLocalSearchParams } from "expo-router";
+import { Feather } from "@expo/vector-icons";
 
 import { ProductIngredients } from "@/components/product-ingredients";
+import { LinkButton } from "@/components/link-button";
+import { Button } from "@/components/button";
 
 import { formatCurrency } from "@/helpers/format-currency";
 import { PRODUCTS } from "@/data/products";
@@ -25,6 +28,15 @@ export default function Product() {
           {product.description}
         </Text>
         <ProductIngredients ingredients={product.ingredients} />
+      </View>
+      <View className="p-5 pb-8 gap-5">
+        <Button>
+          <Button.Icon>
+            <Feather name="plus-circle" size={20} />
+            <Button.Text>Adicionar ao pedido</Button.Text>
+          </Button.Icon>
+        </Button>
+        <LinkButton href="/">Voltar ao cardápio</LinkButton>
       </View>
     </View>
   )
