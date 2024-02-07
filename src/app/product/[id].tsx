@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Image, Text, View } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useNavigation } from "expo-router";
 import { Feather } from "@expo/vector-icons";
 
 import { useCartStore } from "@/store/cart-store";
@@ -14,10 +14,18 @@ import { PRODUCTS } from "@/data/products";
 
 export default function Product() {
   const { id } = useLocalSearchParams()
+  const navigation = useNavigation()
   const cart = useCartStore()
+
+  const handleAddToCart = () => {
+    cart.add(product)
+    navigation.goBack()
+  }
+
   const product = useMemo(() => (
     PRODUCTS.filter((product) => product.id === id)[0]
   ), [id])
+
   return (
     <View className="flex-1">
       <Image source={product.cover} resizeMode="cover" className="w-full h-52" />
@@ -33,7 +41,7 @@ export default function Product() {
         <ProductIngredients ingredients={product.ingredients} />
       </View>
       <View className="p-5 pb-8 gap-5">
-        <Button onPress={() => cart.add(product)}>
+        <Button onPress={handleAddToCart}>
           <Button.Icon>
             <Feather name="plus-circle" size={20} />
             <Button.Text>Adicionar ao pedido</Button.Text>
