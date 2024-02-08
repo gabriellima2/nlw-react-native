@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Alert, ScrollView, Text, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Feather } from "@expo/vector-icons";
@@ -11,15 +12,43 @@ import { Header } from "@/components/header";
 import { Input } from "@/components/input";
 
 import { formatCurrency } from "@/helpers/format-currency";
+import { makeMessage } from "@/services/message";
+
+const message = makeMessage()
 
 export default function Cart() {
   const cart = useCartStore()
+  const [address, setAddress] = useState('')
 
   const handleProductRemove = (product: Product) => {
     Alert.alert('Remover', `Deseja remover ${product.title} do carrinho?`, [
       { text: 'Cancelar' },
       { text: 'Remover', onPress: () => cart.remove(product.id) }
     ])
+  }
+
+  const createOrderDetailsMessage = (products: string, address: string) => {
+    return `
+      NOVO PEDIDO
+      \n Entregar em: ${address}
+
+      ${products}
+
+      \n Valor total: ${formatCurrency(cart.calcTotal())}
+    `
+  }
+
+  const handleSendMessage = (content: string) => {
+    message.send(content)
+  }
+
+  const handleOrderCheckout = () => {
+    const formattedAddress = address.trim()
+    if (!address.length) return Alert.alert('Pedido', 'Por favor, informe o seu endereço!')
+    const products = cart.products
+      .map((product) => `\n ${product.quantity} ${product.title}`)
+      .join('')
+    handleSendMessage(createOrderDetailsMessage(products, formattedAddress))
   }
 
   return (
@@ -35,6 +64,7 @@ export default function Cart() {
             </View>
             <Input
               multiline
+              onChangeText={setAddress}
               textAlignVertical="top"
               placeholder="Ex: Rua dos Lanches, Jardim das Batatas, 07115-000, número 123, apartamento 45B"
               className="h-32"
@@ -43,7 +73,7 @@ export default function Cart() {
         </ScrollView>
       </KeyboardAwareScrollView>
       <View className="p-5 gap-5">
-        <Button>
+        <Button onPress={handleOrderCheckout}>
           <Button.Text>Enviar pedido</Button.Text>
           <Button.Icon>
             <Feather name="arrow-right-circle" size={20} />
