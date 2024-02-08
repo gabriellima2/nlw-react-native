@@ -3,9 +3,9 @@ import { Link } from "expo-router";
 import { SectionList, Text, type ImageSourcePropType } from "react-native";
 
 import { Product } from "./product";
-import { MENU } from "@/data/products";
+import { MENU, type ProductProps } from "@/data/products";
 
-export const ProductListMenu = forwardRef<SectionList>((_, ref) => {
+export const ProductListMenu = forwardRef<SectionList<ProductProps>>((_, ref) => {
   return (
     <SectionList
       ref={ref}

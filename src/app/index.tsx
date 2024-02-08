@@ -8,11 +8,11 @@ import { ProductListMenu } from "@/components/product-list-menu";
 import { CartButton } from "@/components/cart-button";
 import { Header } from "@/components/header";
 
-import { CATEGORIES } from "@/data/products";
+import { CATEGORIES, type ProductProps } from "@/data/products";
 
 export default function Home() {
   const cart = useCartStore()
-  const listRef = useRef<SectionList | null>(null)
+  const listRef = useRef<SectionList<ProductProps> | null>(null)
 
   const handleCategoryChange = (selectedCategory: string) => {
     const sectionIndex = CATEGORIES.findIndex((category) => category === selectedCategory)
