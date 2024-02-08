@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Image, Text, View } from "react-native";
-import { useLocalSearchParams, useNavigation } from "expo-router";
+import { Redirect, useLocalSearchParams, useNavigation } from "expo-router";
 import { Feather } from "@expo/vector-icons";
 
 import { useCartStore } from "@/store/cart-store";
@@ -10,21 +10,23 @@ import { LinkButton } from "@/components/link-button";
 import { Button } from "@/components/button";
 
 import { formatCurrency } from "@/helpers/format-currency";
-import { PRODUCTS } from "@/data/products";
+import { PRODUCTS, type ProductProps } from "@/data/products";
 
 export default function Product() {
   const { id } = useLocalSearchParams()
   const navigation = useNavigation()
   const cart = useCartStore()
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (product: ProductProps) => {
     cart.add(product)
     navigation.goBack()
   }
 
   const product = useMemo(() => (
-    PRODUCTS.filter((product) => product.id === id)[0]
+    PRODUCTS.find((product) => product.id === id)
   ), [id])
+
+  if (!product) return <Redirect href='/' />
 
   return (
     <View className="flex-1">
@@ -41,7 +43,7 @@ export default function Product() {
         <ProductIngredients ingredients={product.ingredients} />
       </View>
       <View className="p-5 pb-8 gap-5">
-        <Button onPress={handleAddToCart}>
+        <Button onPress={() => handleAddToCart(product)}>
           <Button.Icon>
             <Feather name="plus-circle" size={20} />
             <Button.Text>Adicionar ao pedido</Button.Text>
