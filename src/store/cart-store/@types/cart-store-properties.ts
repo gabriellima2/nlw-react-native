@@ -5,4 +5,5 @@ export type CartStoreProperties = {
   products: Product[]
   add: (product: ProductProps) => void
   calcAmount: () => number
+  calcTotal: () => number
 }

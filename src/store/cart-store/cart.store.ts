@@ -23,5 +23,9 @@ export const useCartStore = create<CartStoreProperties>((set, get) => ({
   calcAmount: () => {
     const { products } = get()
     return products.reduce((amount, product) => amount + product.quantity, 0)
+  },
+  calcTotal: () => {
+    const { products } = get()
+    return products.reduce((total, product) => total + product.price * product.quantity, 0)
   }
 }))
