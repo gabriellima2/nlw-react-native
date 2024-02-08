@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { SectionList, View } from "react-native";
+import { Link } from "expo-router";
 
 import { useCartStore } from "@/store/cart-store";
 
@@ -28,7 +29,11 @@ export default function Home() {
     <View className="pt-8 flex-1">
       <Header
         title="Faça seu pedido"
-        renderRight={() => <CartButton productsAmount={cart.calcAmount()} />}
+        renderRight={() => (
+          <Link href='/cart' asChild>
+            <CartButton productsAmount={cart.calcAmount()} />
+          </Link>
+        )}
       />
       <ProductCategories initialCategory={null} onCategoryChange={handleCategoryChange} />
       <ProductListMenu ref={listRef} />

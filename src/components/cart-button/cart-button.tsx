@@ -1,4 +1,5 @@
-import { TouchableOpacity, TouchableOpacityProps } from "react-native";
+import { forwardRef } from "react";
+import { TouchableOpacity, type TouchableOpacityProps } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import colors from "tailwindcss/colors";
 
@@ -9,7 +10,7 @@ export type CartButtonProps = Omit<TouchableOpacityProps, 'children'> & {
   productsAmount?: number | string
 }
 
-export function CartButton(props: CartButtonProps) {
+export const CartButton = forwardRef<TouchableOpacity, CartButtonProps>((props, ref) => {
   const { productsAmount, className, ...rest } = props
   if (productsAmount === undefined) return
   return (
@@ -18,4 +19,6 @@ export function CartButton(props: CartButtonProps) {
       <Feather name="shopping-bag" color={colors.white} size={24} />
     </TouchableOpacity>
   )
-}
+})
+
+CartButton.displayName = 'CartButton'
