@@ -7,10 +7,11 @@ import type { Product as ProductCart } from "@/store/cart-store";
 
 type ProductCartListProps = {
   products: ProductCart[]
+  onRemove: (product: ProductCart) => void
 }
 
 export function ProductCartList(props: ProductCartListProps) {
-  const { products } = props
+  const { products, onRemove } = props
   const hasProductsInCart = !!products.length
   return (
     <>
@@ -22,6 +23,7 @@ export function ProductCartList(props: ProductCartListProps) {
             description={product.description}
             thumbnail={product.thumbnail}
             quantity={product.quantity}
+            onPress={() => onRemove(product)}
           />
         </View>
       ))}

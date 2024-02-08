@@ -4,6 +4,7 @@ import { Product } from "./product";
 export type CartStoreProperties = {
   products: Product[]
   add: (product: ProductProps) => void
+  remove: (id: string) => void
   calcAmount: () => number
   calcTotal: () => number
 }

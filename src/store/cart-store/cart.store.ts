@@ -20,6 +20,15 @@ export const useCartStore = create<CartStoreProperties>((set, get) => ({
     })
     set((state) => ({ ...state, products: updatedProducts }))
   },
+  remove: (id: string) => {
+    const { products } = get()
+    const productsWithUpdatedQuantity = products.map((product) => {
+      if (product.id !== id) return product
+      return { ...product, quantity: !!product.quantity ? product.quantity - 1 : 0 }
+    })
+    const updatedProducts = productsWithUpdatedQuantity.filter((product) => !!product.quantity)
+    set((state) => ({ ...state, products: updatedProducts }))
+  },
   calcAmount: () => {
     const { products } = get()
     return products.reduce((amount, product) => amount + product.quantity, 0)
