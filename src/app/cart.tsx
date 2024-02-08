@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Alert, ScrollView, Text, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { Feather } from "@expo/vector-icons";
+import { useNavigation } from "expo-router";
 
 import { useCartStore, type Product } from "@/store/cart-store";
 
@@ -13,7 +14,6 @@ import { Input } from "@/components/input";
 
 import { formatCurrency } from "@/helpers/format-currency";
 import { makeMessage } from "@/services/message";
-import { useNavigation } from "expo-router";
 
 const message = makeMessage()
 
@@ -74,6 +74,9 @@ export default function Cart() {
               multiline
               onChangeText={setAddress}
               textAlignVertical="top"
+              onSubmitEditing={handleOrderCheckout}
+              returnKeyType="send"
+              blurOnSubmit
               placeholder="Ex: Rua dos Lanches, Jardim das Batatas, 07115-000, número 123, apartamento 45B"
               className="h-32"
             />
