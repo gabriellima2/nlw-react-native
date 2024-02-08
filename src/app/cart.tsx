@@ -15,6 +15,7 @@ import { Input } from "@/components/input";
 import { formatCurrency } from "@/helpers/format-currency";
 import { makeMessage } from "@/services/message";
 
+const phone = process.env.EXPO_PUBLIC_PHONE
 const message = makeMessage()
 
 export default function Cart() {
@@ -40,8 +41,8 @@ export default function Cart() {
     `
   }
 
-  const handleSendMessage = (content: string) => {
-    message.send(content)
+  const handleSendMessage = (phone: string, content: string) => {
+    message.send(phone, content)
   }
 
   const reset = () => {
@@ -55,7 +56,8 @@ export default function Cart() {
     const products = cart.products
       .map((product) => `\n ${product.quantity} ${product.title}`)
       .join('')
-    handleSendMessage(createOrderDetailsMessage(products, formattedAddress))
+    if (!phone) return
+    handleSendMessage(phone, createOrderDetailsMessage(products, formattedAddress))
     reset()
   }
 
