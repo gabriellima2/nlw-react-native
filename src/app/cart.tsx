@@ -1,10 +1,13 @@
 import { useMemo } from "react";
 import { ScrollView, Text, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { Feather } from "@expo/vector-icons";
 
 import { useCartStore } from "@/store/cart-store";
 
 import { ProductCartList } from "@/components/product-cart-list";
+import { LinkButton } from "@/components/link-button";
+import { Button } from "@/components/button";
 import { Header } from "@/components/header";
 import { Input } from "@/components/input";
 
@@ -33,6 +36,17 @@ export default function Cart() {
           </View>
         </ScrollView>
       </KeyboardAwareScrollView>
+      <View className="p-5 gap-5">
+        <Button>
+          <Button.Text>Enviar pedido</Button.Text>
+          <Button.Icon>
+            <Feather name="arrow-right-circle" size={20} />
+          </Button.Icon>
+        </Button>
+        <LinkButton href="/">
+          Voltar ao cardápio
+        </LinkButton>
+      </View>
     </View>
   )
-}
+} 
