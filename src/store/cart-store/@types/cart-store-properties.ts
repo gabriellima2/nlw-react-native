@@ -5,6 +5,7 @@ export type CartStoreProperties = {
   products: Product[]
   add: (product: ProductProps) => void
   remove: (id: string) => void
+  clear: () => void
   calcAmount: () => number
   calcTotal: () => number
 }

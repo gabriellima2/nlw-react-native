@@ -3,8 +3,8 @@ import { createJSONStorage, persist } from "zustand/middleware";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import type { CartStoreProperties } from "./@types/cart-store-properties";
-import type { Product } from "./@types/product";
 import type { ProductProps } from "@/data/products";
+import type { Product } from "./@types/product";
 
 export const useCartStore = create(
   persist<CartStoreProperties>((set, get) => ({
@@ -32,6 +32,7 @@ export const useCartStore = create(
       const updatedProducts = productsWithUpdatedQuantity.filter((product) => !!product.quantity)
       set((state) => ({ ...state, products: updatedProducts }))
     },
+    clear: () => set((state) => ({ ...state, products: [] })),
     calcAmount: () => {
       const { products } = get()
       return products.reduce((amount, product) => amount + product.quantity, 0)

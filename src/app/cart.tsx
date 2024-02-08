@@ -13,11 +13,13 @@ import { Input } from "@/components/input";
 
 import { formatCurrency } from "@/helpers/format-currency";
 import { makeMessage } from "@/services/message";
+import { useNavigation } from "expo-router";
 
 const message = makeMessage()
 
 export default function Cart() {
   const cart = useCartStore()
+  const navigation = useNavigation()
   const [address, setAddress] = useState('')
 
   const handleProductRemove = (product: Product) => {
@@ -42,6 +44,11 @@ export default function Cart() {
     message.send(content)
   }
 
+  const reset = () => {
+    cart.clear()
+    navigation.goBack()
+  }
+
   const handleOrderCheckout = () => {
     const formattedAddress = address.trim()
     if (!address.length) return Alert.alert('Pedido', 'Por favor, informe o seu endereço!')
@@ -49,6 +56,7 @@ export default function Cart() {
       .map((product) => `\n ${product.quantity} ${product.title}`)
       .join('')
     handleSendMessage(createOrderDetailsMessage(products, formattedAddress))
+    reset()
   }
 
   return (
