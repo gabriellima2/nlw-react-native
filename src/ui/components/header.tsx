@@ -12,9 +12,7 @@ export function Header(props: HeaderProps) {
     <View className="flex-row items-center border-b border-slate-700 pb-5 mx-5">
       <View className="flex-1">
         <Logo />
-        <Text className="text-white text-xl font-heading mt-2">
-          {title}
-        </Text>
+        <Text className="text-white text-xl font-heading mt-2">{title} </Text>
       </View>
       {renderRight && renderRight()}
     </View>

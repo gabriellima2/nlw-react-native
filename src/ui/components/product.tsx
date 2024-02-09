@@ -1,5 +1,12 @@
 import { forwardRef } from "react";
-import { Image, Text, TouchableOpacity, View, type ImageSourcePropType, type TouchableOpacityProps } from "react-native";
+import {
+  Image,
+  Text,
+  TouchableOpacity,
+  View,
+  type ImageSourcePropType,
+  type TouchableOpacityProps
+} from "react-native";
 
 import { cn } from "@/helpers/cn";
 

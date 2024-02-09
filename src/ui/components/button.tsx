@@ -1,5 +1,10 @@
 import { type PropsWithChildren } from "react";
-import { Text as RNText, TouchableOpacity, type TouchableOpacityProps, type TextProps } from "react-native";
+import {
+  Text as RNText,
+  TouchableOpacity,
+  type TouchableOpacityProps,
+  type TextProps
+} from "react-native";
 
 import { cn } from "@/helpers/cn";
 

@@ -1,5 +1,5 @@
+import { Pressable, Text, type PressableProps } from "react-native";
 import { cn } from "@/helpers/cn";
-import { Pressable, PressableProps, Text } from "react-native";
 
 export type CategoryProps = PressableProps & {
   title: string

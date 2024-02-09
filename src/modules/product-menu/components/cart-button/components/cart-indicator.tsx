@@ -1,5 +1,5 @@
 import { Text } from "react-native";
-import { Indicator, type IndicatorProps } from "../../indicator";
+import { Indicator, type IndicatorProps } from "@/ui/components/indicator";
 
 type CartIndicatorProps = IndicatorProps & {
   amount?: number | string

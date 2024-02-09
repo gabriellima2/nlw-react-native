@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FlatList } from "react-native";
 
-import { Category } from "./category";
+import { Category } from "@/ui/components/category";
 import { CATEGORIES } from "@/data/products";
 
 export type ProductCategoriesProps = {
@@ -27,7 +27,7 @@ export function ProductCategories(props: ProductCategoriesProps) {
             onCategoryChange(item)
           }} />
       )}
-      className="max-h-10 mt-5"
+      className="max-h-12 mt-5"
       contentContainerStyle={{ gap: 12, paddingHorizontal: 20 }}
       horizontal
       showsHorizontalScrollIndicator={false}

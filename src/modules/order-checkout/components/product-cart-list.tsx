@@ -1,7 +1,7 @@
 import { View } from "react-native";
 
 import { EmptyCartMessage } from "./empty-cart-message";
-import { Product } from "./product";
+import { Product } from "../../../ui/components/product";
 
 import type { Product as ProductCart } from "@/store/cart-store";
 

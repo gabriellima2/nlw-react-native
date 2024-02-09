@@ -1,8 +1,8 @@
 import { forwardRef } from "react";
-import { Link } from "expo-router";
 import { SectionList, Text, type ImageSourcePropType } from "react-native";
+import { Link } from "expo-router";
 
-import { Product } from "./product";
+import { Product } from "@/ui/components/product";
 import { MENU, type ProductProps } from "@/data/products";
 
 export const ProductListMenu = forwardRef<SectionList<ProductProps>>((_, ref) => {
@@ -26,7 +26,7 @@ export const ProductListMenu = forwardRef<SectionList<ProductProps>>((_, ref) =>
             thumbnail={item.thumbnail as ImageSourcePropType}
           />
         </Link>
-  
+
       )}
     />
   )
