@@ -1,33 +1,18 @@
-import { useMemo } from "react";
 import { Image, Text, View } from "react-native";
-import { Redirect, useLocalSearchParams, useNavigation } from "expo-router";
+import { Redirect } from "expo-router";
 import { Feather } from "@expo/vector-icons";
 
-import { useCartStore } from "@/store/cart-store";
+import { useProductDetails } from "../hooks/use-product-details";
 
 import { ProductIngredients } from "../components/product-ingredients";
 import { LinkButton } from "@/ui/components/link-button";
 import { Button } from "@/ui/components/button";
 
 import { formatCurrency } from "@/helpers/format-currency";
-import { PRODUCTS, type ProductProps } from "@/data/products";
 
 export function Product() {
-  const { id } = useLocalSearchParams()
-  const navigation = useNavigation()
-  const cart = useCartStore()
-
-  const handleAddToCart = (product: ProductProps) => {
-    cart.add(product)
-    navigation.goBack()
-  }
-
-  const product = useMemo(() => (
-    PRODUCTS.find((product) => product.id === id)
-  ), [id])
-
+  const { product, handleAddToCart } = useProductDetails()
   if (!product) return <Redirect href='/' />
-
   return (
     <View className="flex-1">
       <Image source={product.cover} resizeMode="cover" className="w-full h-52" />
